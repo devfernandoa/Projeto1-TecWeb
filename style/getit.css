@@ -230,6 +230,7 @@ body {
   height: 30px;
   width: 100%; /* Faz com que o botão preencha toda a largura do cartão */
   padding: 0px; /* Adiciona algum espaço interno ao botão */
+  margin-bottom: 5px;
   cursor: pointer; /* Muda o cursor para um ponteiro quando o usuário passa o mouse sobre o botão */
 }
 
@@ -247,7 +248,7 @@ body {
   margin-right: 10px;
 }
 
-.trash-icon {
+.btn-delete {
   position: fixed;
   bottom: 5px;
   right: 0px;
@@ -257,3 +258,14 @@ body {
   border-color: transparent;
   background-color: transparent;
 }
+
+.btn-edit {
+  position: fixed;
+  bottom: 5px;
+  right: 25px;
+  display: inline-block;
+  width: 20px;
+  height: 20px; 
+  border-color: transparent;
+  background-color: transparent;
+}	

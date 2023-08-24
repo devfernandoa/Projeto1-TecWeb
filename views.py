@@ -14,6 +14,27 @@ def delete(request):
 
     return build_response(code=303, headers='Location: /')
 
+def edit(request):
+    request = request.replace('\r', '')  # Remove caracteres indesejados
+    partes = request.split('\n\n')
+    corpo = partes[1]
+    note_id = corpo.split('=')[1]
+    note = db.get(note_id)
+    return build_response(body=load_template('edit.html').format(id=note.id, title=note.title, content=note.content))
+
+def update(request):
+    request = request.replace('\r', '')  # Remove caracteres indesejados
+    partes = request.split('\n\n')
+    corpo = partes[1]
+    note_id = corpo.split('&')[0].split('=')[1]
+    title = corpo.split('&')[1].split('=')[1].replace('+', ' ')
+    content = corpo.split('&')[2].split('=')[1].replace('+', ' ')
+    db.update(Note(id=note_id, title=title, content=content))
+    return build_response(code=303, reason='See Other', headers='Location: /')
+
+def not_found(request):
+    return build_response(code=404, body=load_template('404.html'))
+
 def index(request):
     # A string de request sempre começa com o tipo da requisição (ex: GET, POST)
     if request.startswith('POST'):
@@ -28,7 +49,6 @@ def index(request):
         # Dica: use o método split da string e a função unquote_plus
         itens = [0,0]
         for chave_valor in corpo.split('&'):
-            print(chave_valor)
             chave, valor = chave_valor.split('=')
             if chave == 'titulo':
                 itens[0] = valor.replace('+', ' ')
@@ -36,7 +56,6 @@ def index(request):
                 itens[1] = valor.replace('+', ' ')
         # Atualiza o database com a nova anotação
         db.add(Note(title=itens[0], content=itens[1]))
-        print("ITEMS SÃO: ", itens)
         return build_response(code=303, reason='See Other', headers='Location: /')
         
             
