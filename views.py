@@ -1,8 +1,18 @@
-from utils import load_data, load_template, update_data, build_response
+from utils import load_data, load_template, build_response
 from database import Database
 from database import Note
 
 db = Database('notehtml')
+
+def delete(request):
+    request = request.replace('\r', '')  # Remove caracteres indesejados
+    partes = request.split('\n\n')
+    corpo = partes[1]
+    note_id = corpo.split('=')[1]
+    
+    db.delete(note_id)
+
+    return build_response(code=303, headers='Location: /')
 
 def index(request):
     # A string de request sempre começa com o tipo da requisição (ex: GET, POST)
@@ -45,18 +55,10 @@ def index(request):
     return build_response(body=load_template('index.html').format(notes=notes))'''
 
     notes = db.get_all()
-    for note in notes:
-        print(f'Anotação {note.id}:\n  Título: {note.title}\n  Conteúdo: {note.content}\n')
     note_template = load_template('components/note.html')
     notes_li = [
-        note_template.format(title=note.title, details=note.content)
+        note_template.format(title=note.title, details=note.content, id=note.id)
         for note in notes
     ]
-    titulo_li = [
-        note.title for note in notes 
-    ]
-    detalhes_li = [
-        note.content for note in notes
-    ]
     notes = '\n'.join(notes_li)
-    return build_response(body=load_template('index.html').format(notes=notes, title=titulo_li, content=detalhes_li))
+    return build_response(body=load_template('index.html').format(notes=notes))

@@ -29,25 +29,6 @@ def load_data(JsonFile):
     except:
         return None
 
-def update_data(JsonFile, data):
-    "Atualiza os dados do arquivo json"
-    try:
-        path = CUR_DIR / "data"
-
-        file = open(path / JsonFile, 'r', encoding='utf-8')
-        old_data = json.load(file)
-        file.close()
-
-        file = open(path / JsonFile, 'w')
-        old_data.append({"titulo": f"{data[0]}","detalhes": f"{data[1]}"},)
-        json.dump(old_data, file)
-        file.close()
-
-        return True
-    except:
-        print("FUDEUUUUUUUUU 2")
-        return False
-
 
 def load_template(Template):
     "Carrega os dados do arquivo html"
@@ -58,7 +39,7 @@ def load_template(Template):
         file.close()
         return data
     except:
-        print("FUDEUUUUUUUU")
+        print("Erro ao carregar HTML")
         return None
     
 def build_response(body='', code=200, reason='OK', headers=''):

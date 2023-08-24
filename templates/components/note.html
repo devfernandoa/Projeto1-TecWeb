@@ -3,4 +3,10 @@
     <div class="card-content">
         <p>{details}</p>
     </div>
+    <form method="post" action="/delete">
+        <input type="hidden" name="id" value="{id}">
+        <button class="trash-icon" type="submit">
+            <img src="../../img/trash-open.png" style="width: 20px; height: 20px; position: fixed; bottom: 5px; right: 0px">
+        </button>
+    </form>
 </li>

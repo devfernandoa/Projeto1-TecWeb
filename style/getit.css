@@ -246,3 +246,14 @@ body {
   height: auto;
   margin-right: 10px;
 }
+
+.trash-icon {
+  position: fixed;
+  bottom: 5px;
+  right: 0px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-color: transparent;
+  background-color: transparent;
+}
