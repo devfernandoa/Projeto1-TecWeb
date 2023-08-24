@@ -26,6 +26,7 @@ def index(request):
                 itens[1] = valor.replace('+', ' ')
         # Atualiza o database com a nova anotação
         db.add(Note(title=itens[0], content=itens[1]))
+        print("ITEMS SÃO: ", itens)
         return build_response(code=303, reason='See Other', headers='Location: /')
         
             
@@ -51,5 +52,11 @@ def index(request):
         note_template.format(title=note.title, details=note.content)
         for note in notes
     ]
+    titulo_li = [
+        note.title for note in notes 
+    ]
+    detalhes_li = [
+        note.content for note in notes
+    ]
     notes = '\n'.join(notes_li)
-    return build_response(body=load_template('index.html').format(notes=notes))
+    return build_response(body=load_template('index.html').format(notes=notes, title=titulo_li, content=detalhes_li))

@@ -34,7 +34,7 @@ def update_data(JsonFile, data):
     try:
         path = CUR_DIR / "data"
 
-        file = open(path / JsonFile, 'r')
+        file = open(path / JsonFile, 'r', encoding='utf-8')
         old_data = json.load(file)
         file.close()
 
@@ -53,7 +53,7 @@ def load_template(Template):
     "Carrega os dados do arquivo html"
     try:
         path = CUR_DIR / "templates"
-        file = open(path / Template, 'r')
+        file = open(path / Template, 'r', encoding='utf-8')
         data = file.read()
         file.close()
         return data
