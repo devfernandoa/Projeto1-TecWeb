@@ -22,7 +22,7 @@ def load_data(JsonFile):
     "Carrega os dados do arquivo json"
     try:
         path = CUR_DIR / "data"
-        file = open(path / JsonFile, 'r')
+        file = open(path / JsonFile, 'r', encoding='utf-8')
         data = json.load(file)
         file.close()
         return data
@@ -34,7 +34,7 @@ def load_template(Template):
     "Carrega os dados do arquivo html"
     try:
         path = CUR_DIR / "templates"
-        file = open(path / Template, 'r', encoding='utf-8')
+        file = open(path / Template, 'r', encoding="utf-8")
         data = file.read()
         file.close()
         return data
@@ -46,5 +46,5 @@ def build_response(body='', code=200, reason='OK', headers=''):
     "Retorna a resposta do servidor"
     if headers == '':
         headers = "Content-Type: text/html; charset=utf-8"
-    return (f"HTTP/1.1 {code} {reason}\n{headers}\n\n{body}").encode()
+    return (f"HTTP/1.1 {code} {reason}\n{headers}\n\n{body}").encode("utf-8")
     
