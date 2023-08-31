@@ -46,9 +46,9 @@ body {
   flex-direction: column;
   justify-content: space-between;
   width: 250px;
-  height: 250px;
-  margin-left: 5px;
-  margin-right: 10px;
+  height: 34 0px;
+  margin-left: 20px;
+  margin-right: 20px;
   margin-bottom: 30px;
   border-radius: 5px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
@@ -122,10 +122,11 @@ body {
   font-size: 1.5em;
   font-weight: bold;
   font-family: 'Permanent Marker', cursive;
-  margin-top: 5%;
+  margin-top: 10%;
   margin-bottom: 10%;
   margin-left: 2px;
   color: #2c2c2c;
+  word-wrap: break-word;
 }	
 
 .card-content {
@@ -137,8 +138,8 @@ body {
   font-family: 'Permanent Marker', cursive;
   margin-left: 2%;
   margin-right: 2%;
-  margin-bottom: 2%;
-  color:#4c4c4c
+  color:#4c4c4c;
+  word-wrap: break-word;
 }
 
 .btn {
@@ -250,7 +251,7 @@ body {
 
 .btn-delete {
   position: fixed;
-  bottom: 5px;
+  top: 5px;
   right: 0px;
   display: inline-block;
   width: 20px;
@@ -261,7 +262,7 @@ body {
 
 .btn-edit {
   position: fixed;
-  bottom: 5px;
+  top: 5px;
   right: 25px;
   display: inline-block;
   width: 20px;
@@ -275,9 +276,34 @@ body {
   border: 1px solid #2c2c2c;
   border-radius: 5px;
   margin: 2%;
-  margin-bottom: 12%;
+  margin-bottom: 4%;
+  width: 240px;
+  height: 200px;
 }
 
+.btn-voltar {
+  height: 30px;
+  width: 100%; /* Faz com que o botão preencha toda a largura do cartão */
+  padding: 0px; /* Adiciona algum espaço interno ao botão */
+  margin-bottom: 5px;
+  cursor: pointer; /* Muda o cursor para um ponteiro quando o usuário passa o mouse sobre o botão */
+}
+
+.btn-principal {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-top: 1%;
+
+  overflow: hidden;
+
+  border-width: 0;
+  outline: none;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+
+  background-color: #f7d736;
+}
 /* Night mode */
 body.night-mode {
   background-color: #2c2c2c;
@@ -286,13 +312,11 @@ body.night-mode {
 
 .card.night-mode {
   background-color: #3a3a3a;
-  box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.1);
 }
 
 .appbar.night-mode {
   background-color: #3a3a3a;
   color: #f5f5f5;
-  box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.1);
 }
 
 .card-title.night-mode {
@@ -307,7 +331,7 @@ body.night-mode {
 }
 
 .card-canvas.night-mode {   
-  border-color: #f5f5f5;
+  border-color: #bababa;
 }
 
 .card-color-1.night-mode {
@@ -323,11 +347,11 @@ body.night-mode {
 }
 
 .card-color-4.night-mode {
-  background-color: #605313;
+  background-color: #504a2a;
 }
 
 .card-color-5.night-mode {
-  background-color: #0f4823;
+  background-color: #1a3624;
 }
 
 .form-card.night-mode { 

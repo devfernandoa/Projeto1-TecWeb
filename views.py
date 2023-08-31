@@ -1,6 +1,7 @@
 from utils import load_data, load_template, build_response
 from database import Database
 from database import Note
+from urllib.parse import unquote_plus
 
 db = Database('notehtml')
 
@@ -27,8 +28,8 @@ def update(request):
     partes = request.split('\n\n')
     corpo = partes[1]
     note_id = corpo.split('&')[0].split('=')[1]
-    title = corpo.split('&')[1].split('=')[1].replace('+', ' ')
-    content = corpo.split('&')[2].split('=')[1].replace('+', ' ')
+    title = unquote_plus(corpo.split('&')[1].split('=')[1])
+    content = unquote_plus(corpo.split('&')[2].split('=')[1])
     db.update(Note(id=note_id, title=title, content=content))
     return build_response(code=303, reason='See Other', headers='Location: /')
 
@@ -51,10 +52,11 @@ def index(request):
         for chave_valor in corpo.split('&'):
             chave, valor = chave_valor.split('=')
             if chave == 'titulo':
-                itens[0] = valor.replace('+', ' ')
+                itens[0] = unquote_plus(valor)
             elif chave == 'detalhes':
-                itens[1] = valor.replace('+', ' ')
-        # Atualiza o database com a nova anotação
+                itens[1] = unquote_plus(valor)
+
+
         db.add(Note(title=itens[0], content=itens[1]))
         return build_response(code=303, reason='See Other', headers='Location: /')
         

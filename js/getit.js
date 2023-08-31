@@ -76,9 +76,56 @@ document.querySelector('#night-mode-toggle').addEventListener('click', () => {
   localStorage.setItem(NIGHT_MODE_KEY, body.classList.contains('night-mode'));
 });
 
+let draggedCard = null;
+
+for (let i = 0; i < cards.length; i++) {
+  let card = cards[i];
+  let canvas = canvases[i]
+
+  card.addEventListener('dragstart', function (event) {
+    draggedCard = this;
+    setTimeout(() => {
+      this.style.display = 'none';
+    }, 0);
+  });
+
+  card.addEventListener('dragend', function (event) {
+    draggedCard = null;
+    setTimeout(() => {
+      this.style.display = 'block';
+    }, 0);
+  });
+
+  card.addEventListener('dragover', function (event) {
+    event.preventDefault();
+  });
+
+  card.addEventListener('dragenter', function (event) {
+    event.preventDefault();
+    this.style.transform = 'scale(1.1)';
+  });
+
+  card.addEventListener('dragleave', function (event) {
+    this.style.transform = 'scale(1)';
+  });
+
+  card.addEventListener('drop', function (event) {
+    event.preventDefault();
+    this.style.transform = 'scale(1)';
+    if (draggedCard !== this) {
+      let draggedCardIndex = Array.prototype.indexOf.call(cards, draggedCard);
+      let dropCardIndex = Array.prototype.indexOf.call(cards, this);
+      if (draggedCardIndex < dropCardIndex) {
+        this.parentNode.insertBefore(draggedCard, this.nextSibling);
+      } else {
+        this.parentNode.insertBefore(draggedCard, this);
+      }
+    }
+  });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   // Faz textarea aumentar a altura automaticamente
-  // Fonte: https://www.geeksforgeeks.org/how-to-create-auto-resize-textarea-using-javascript-jquery/#:~:text=It%20can%20be%20achieved%20by,height%20of%20an%20element%20automatically.
   let textareas = document.getElementsByClassName("autoresize");
   for (let i = 0; i < textareas.length; i++) {
     let textarea = textareas[i];
